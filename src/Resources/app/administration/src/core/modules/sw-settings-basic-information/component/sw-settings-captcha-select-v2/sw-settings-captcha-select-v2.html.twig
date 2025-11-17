@@ -1,0 +1,39 @@
+<!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+{% block sw_settings_captcha_select_v2 %}
+<sw-container class="sw-settings-captcha-select-v2">
+    {% parent() %}
+    <mt-card
+        :title="$tc('sw-settings-basic-information.captcha.label.altchaCaptcha')"
+        v-if="currentValue.altchaCaptcha.isActive"
+        class="sw-settings-captcha-select-v2__altcha-captcha"
+    >
+        <p
+            class="sw-settings-captcha-select-v2__description sw-settings-captcha-select-v2__altcha-captcha-description"
+        >
+            {{ $tc('sw-settings-basic-information.captcha.label.altchaCaptchaDescription') }}
+        </p>
+        <sw-password-field
+            type="password"
+            minlength="32"
+            v-model:value="currentValue.altchaCaptcha.config.secretKey"
+            name="altchaCaptchaSecretKey"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaSecretKey')"
+        />
+        <sw-checkbox-field
+            v-model:value="currentValue.altchaCaptcha.config.whitelistCustomers"
+            name="altchaCaptchaWhitelistCustomers"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaWhitelistCustomers')"
+        />
+        <sw-checkbox-field
+            v-model:value="currentValue.altchaCaptcha.config.hideFooter"
+            name="altchaCaptchaHideFooter"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaHideFooter')"
+        />
+        <sw-checkbox-field
+            v-model:value="currentValue.altchaCaptcha.config.hideLogo"
+            name="altchaCaptchaHideLogo"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaHideLogo')"
+        />
+    </mt-card>
+</sw-container>
+{% endblock %}

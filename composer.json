@@ -1,0 +1,42 @@
+{
+    "name": "tinect/altcha-captcha",
+    "description": "",
+    "type": "shopware-platform-plugin",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "tinect"
+        }
+    ],
+    "require": {
+        "shopware/storefront": "*",
+        "shopware/core": "~6.6.0",
+        "altcha-org/altcha": "^1.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Tinect\\AltchaCaptcha\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Tinect\\AltchaCaptcha\\TinectAltchaCaptcha",
+        "copyright": "tinect",
+        "label": {
+            "de-DE": "AltchaCaptcha by tinect",
+            "en-GB": "AltchaCaptcha by tinect"
+        },
+        "description": {
+            "de-DE": "",
+            "en-GB": ""
+        },
+        "manufacturerLink": {
+            "de-DE": "https://github.com/tinect/",
+            "en-GB": "https://github.com/tinect/"
+        },
+        "supportLink": {
+            "de-DE": "https://github.com/tinect/",
+            "en-GB": "https://github.com/tinect/"
+        }
+    }
+}

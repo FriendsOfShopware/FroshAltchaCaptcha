@@ -1,0 +1,17 @@
+{% block component_captcha_altcha %}
+    {% set configPath = constant('Tinect\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
+
+    {% if not config(cconfigPath ~ '.whitelistCustomers') %}
+        <altcha-widget
+            challengeurl="{{ path('widgets.altcha.challenge') }}"
+            {% if config(configPath ~ '.hideFooter') %}
+                hidefooter="1"
+            {% endif %}
+            {% if config(configPath ~ '.hideLogo') %}
+                hideLogo="1"
+            {% endif %}
+
+            auto="onsubmit"
+        ></altcha-widget>
+    {% endif %}
+{% endblock %}
