@@ -13,10 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 #[AutoconfigureTag(name: 'shopware.storefront.captcha')]
 class AltchaCaptcha extends AbstractCaptcha
 {
-    public const string CAPTCHA_NAME = 'altchaCaptcha';
-    public const string CAPTCHA_REQUEST_PARAMETER = 'altcha';
-    public const string CONFIG_FIELD_SECRET = 'secretKey';
-    public const string CONFIG_PATH = 'core.basicInformation.activeCaptchasV2.' . self::CAPTCHA_NAME . '.config';
+    public const CAPTCHA_NAME = 'altchaCaptcha';
+    public const CAPTCHA_REQUEST_PARAMETER = 'altcha';
+    public const CONFIG_FIELD_SECRET = 'secretKey';
+    public const CONFIG_PATH = 'core.basicInformation.activeCaptchasV2.' . self::CAPTCHA_NAME . '.config';
 
     public function isValid(Request $request, array $captchaConfig): bool
     {
