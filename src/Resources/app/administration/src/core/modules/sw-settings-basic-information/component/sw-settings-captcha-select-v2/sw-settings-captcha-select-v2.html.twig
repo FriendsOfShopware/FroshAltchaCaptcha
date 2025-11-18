@@ -7,6 +7,16 @@
         v-if="currentValue.altchaCaptcha.isActive"
         class="sw-settings-captcha-select-v2__altcha-captcha"
     >
+        <template #subtitle>
+            <MtText
+                color="color-text-secondary-default"
+                size="xs"
+                class="mt-card__subtitle"
+            >
+                Brought to Shopware for free by <a href='https://github.com/tinect/' target='_blank'>@tinect</a>
+            </MtText>
+        </template>
+
         <p
             class="sw-settings-captcha-select-v2__description sw-settings-captcha-select-v2__altcha-captcha-description"
         >
