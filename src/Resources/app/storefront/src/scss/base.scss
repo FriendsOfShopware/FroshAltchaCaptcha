@@ -1,0 +1,7 @@
+:root {
+    --altcha-border-width: var(--bs-border-width);
+    --altcha-border-radius: var(--bs-border-radius);
+    --altcha-color-border: #{$sw-border-color};
+    --altcha-color-border-focus: #{$sw-color-brand-primary};
+    --altcha-color-error-text: #{$sw-color-danger};
+}
