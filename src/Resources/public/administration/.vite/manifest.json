@@ -1,0 +1,11 @@
+{
+  "main.js": {
+    "file": "js/tinect-altcha-captcha.js",
+    "name": "tinect-altcha-captcha",
+    "src": "main.js",
+    "isEntry": true,
+    "css": [
+      "css/tinect-altcha-captcha.css"
+    ]
+  }
+}
