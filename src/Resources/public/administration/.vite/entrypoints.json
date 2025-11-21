@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/tinectaltchacaptcha/administration/",
+  "entryPoints": {
+    "tinect-altcha-captcha": {
+      "css": [
+        "/bundles/tinectaltchacaptcha/administration/css/tinect-altcha-captcha.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/tinectaltchacaptcha/administration/js/tinect-altcha-captcha.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.0.4",
+    7,
+    0,
+    4
+  ],
+  "viteServer": null
+}
