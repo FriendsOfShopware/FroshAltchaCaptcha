@@ -2,7 +2,7 @@
     "name": "frosh/altcha-captcha",
     "description": "Self-hosted Altcha Captcha plugin for Shopware 6. Adds secure, user-friendly bot protection without relying on third-party services.",
     "type": "shopware-platform-plugin",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "authors": [
         {
             "name": "FriendsOfShopware",

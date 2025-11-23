@@ -18,4 +18,9 @@ class FroshAltchaCaptcha extends Plugin
             ['key' => 'core.basicInformation.activeCaptchasV2']
         );
     }
+
+    public function executeComposerCommands(): bool
+    {
+        return true;
+    }
 }

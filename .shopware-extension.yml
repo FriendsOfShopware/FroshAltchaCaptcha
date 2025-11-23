@@ -64,5 +64,7 @@ build:
     assets:
       enable_es_build_for_admin: true
       enable_es_build_for_storefront: true
+    composer:
+      enabled: true
 changelog:
   enabled: true
