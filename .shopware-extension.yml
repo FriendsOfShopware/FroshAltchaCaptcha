@@ -35,7 +35,7 @@ store:
       - compliance
       - accessibility
   images:
-    - file: src/Resources/store/images/0.jpg
+    - file: src/Resources/store/images/0.png
       activate:
         de: true
         en: true
@@ -43,7 +43,7 @@ store:
         de: true
         en: true
       priority: 0
-    - file: src/Resources/store/images/1.jpg
+    - file: src/Resources/store/images/1.png
       activate:
         de: true
         en: true
@@ -51,7 +51,7 @@ store:
         de: false
         en: false
       priority: 1
-    - file: src/Resources/store/images/2.jpg
+    - file: src/Resources/store/images/2.png
       activate:
         de: true
         en: true
@@ -64,3 +64,5 @@ build:
     assets:
       enable_es_build_for_admin: true
       enable_es_build_for_storefront: true
+changelog:
+  enabled: true
