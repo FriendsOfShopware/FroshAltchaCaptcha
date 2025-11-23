@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tinect\AltchaCaptcha\Controller;
+namespace Frosh\AltchaCaptcha\Controller;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Tinect\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
+use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 
 #[Route(defaults: ['_routeScope' => ['storefront']])]
 class AltchaController extends AbstractController

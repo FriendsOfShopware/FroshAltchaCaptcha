@@ -1,42 +1,45 @@
 {
-    "name": "tinect/altcha-captcha",
+    "name": "frosh/altcha-captcha",
     "description": "Self-hosted Altcha Captcha plugin for Shopware 6. Adds secure, user-friendly bot protection without relying on third-party services.",
     "type": "shopware-platform-plugin",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "authors": [
+        {
+            "name": "FriendsOfShopware",
+            "homepage": "https://friendsofshopware.de"
+        },
         {
             "name": "tinect"
         }
     ],
     "require": {
-        "shopware/storefront": "*",
         "shopware/core": "~6.6.0||~6.7.0",
+        "shopware/storefront": "*",
         "altcha-org/altcha": "^1.2"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Tinect\\AltchaCaptcha\\": "src/"
+            "Frosh\\AltchaCaptcha\\": "src/"
         }
     },
     "extra": {
-        "shopware-plugin-class": "Tinect\\AltchaCaptcha\\TinectAltchaCaptcha",
-        "copyright": "tinect",
+        "shopware-plugin-class": "Frosh\\AltchaCaptcha\\FroshAltchaCaptcha",
         "label": {
-            "de-DE": "AltchaCaptcha by tinect",
-            "en-GB": "AltchaCaptcha by tinect"
+            "de-DE": "AltchaCaptcha",
+            "en-GB": "AltchaCaptcha"
         },
         "description": {
             "de-DE": "Fügt selbstgehostetes Altcha-CAPTCHA zu Shopware 6 hinzu und stärkt die Formularsicherheit mit einer leichten, datenschutzfreundlichen Lösung gegen automatisierten Spam.",
             "en-GB": "Adds self-hosted Altcha CAPTCHA support to Shopware 6, improving form security with a lightweight, privacy-first solution that protects shops from automated spam."
         },
         "manufacturerLink": {
-            "de-DE": "https://github.com/tinect/",
-            "en-GB": "https://github.com/tinect/"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshAltchaCaptcha/",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshAltchaCaptcha/"
         },
         "supportLink": {
-            "de-DE": "https://github.com/tinect/TinectAltchaCaptcha/",
-            "en-GB": "https://github.com/tinect/TinectAltchaCaptcha/"
+            "de-DE": "https://github.com/FriendsOfShopware/FroshAltchaCaptcha/",
+            "en-GB": "https://github.com/FriendsOfShopware/FroshAltchaCaptcha/"
         }
     }
 }

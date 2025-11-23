@@ -9,7 +9,7 @@ jobs:
     build:
         uses: FriendsOfShopware/actions/.github/workflows/github.yml@main
         with:
-            extensionName: TinectAltchaCaptcha
+            extensionName: FroshAltchaCaptcha
             shopwareVersion: 6.6.0
         secrets:
             ghToken: ${{ secrets.GITHUB_TOKEN }}

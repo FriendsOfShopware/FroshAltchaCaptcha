@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tinect\AltchaCaptcha\Migration;
+namespace Frosh\AltchaCaptcha\Migration;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Migration\MigrationStep;
 use Shopware\Core\Framework\Util\Random;
-use Tinect\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
+use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 
 class Migration1763454351AddAltchaCaptchaConfiguration extends MigrationStep
 {
