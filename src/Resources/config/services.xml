@@ -5,6 +5,6 @@
 >
     <services>
         <defaults autowire="true" autoconfigure="true"/>
-        <prototype namespace="Tinect\AltchaCaptcha\" resource="../../" exclude="../../{Resources,TinectAltchaCaptcha.php}"/>
+        <prototype namespace="Frosh\AltchaCaptcha\" resource="../../" exclude="../../{Resources,FroshAltchaCaptcha.php}"/>
     </services>
 </container>

@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Tinect\AltchaCaptcha;
+namespace Frosh\AltchaCaptcha;
 
 use Doctrine\DBAL\Connection;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
-use Tinect\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
+use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 
-class TinectAltchaCaptcha extends Plugin
+class FroshAltchaCaptcha extends Plugin
 {
     public function uninstall(UninstallContext $uninstallContext): void
     {

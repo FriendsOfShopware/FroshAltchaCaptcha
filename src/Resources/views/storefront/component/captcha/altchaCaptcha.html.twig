@@ -1,5 +1,5 @@
 {% block component_captcha_altcha %}
-    {% set configPath = constant('Tinect\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
+    {% set configPath = constant('Frosh\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
 
     {% if not config(cconfigPath ~ '.whitelistCustomers') %}
         <altcha-widget

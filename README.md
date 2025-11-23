@@ -1,4 +1,4 @@
-# TinectAltchaCaptcha
+# FroshAltchaCaptcha
 
 Self-hosted Altcha Captcha plugin for Shopware 6. Adds secure, user-friendly bot protection without relying on third-party services.
 
@@ -19,12 +19,12 @@ Self-hosted Altcha Captcha plugin for Shopware 6. Adds secure, user-friendly bot
 ### Via Composer
 
 ```bash
-composer require tinect/altcha-captcha
+composer require frosh/altcha-captcha
 ```
 
 ```bash
 bin/console plugin:refresh
-bin/console plugin:install --activate TinectAltchaCaptcha
+bin/console plugin:install --activate FroshAltchaCaptcha
 bin/console cache:clear
 ```
 
@@ -59,13 +59,13 @@ src/
 ├── Storefront/
 │   └── Framework/
 │       └── AltchaCaptcha.php      # Core CAPTCHA logic
-└── TinectAltchaCaptcha.php        # Plugin bootstrap
+└── FroshAltchaCaptcha.php        # Plugin bootstrap
 ```
 
 ## Support
 
-- **GitHub Issues**: [https://github.com/tinect/TinectAltchaCaptcha/issues](https://github.com/tinect/TinectAltchaCaptcha/issues)
-- **Documentation**: [https://github.com/tinect/TinectAltchaCaptcha/](https://github.com/tinect/TinectAltchaCaptcha/)
+- **GitHub Issues**: [https://github.com/FriendsOfShopware/FroshAltchaCaptcha/issues](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/issues)
+- **Documentation**: [https://github.com/FriendsOfShopware/FroshAltchaCaptcha/](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/)
 
 ## License
 

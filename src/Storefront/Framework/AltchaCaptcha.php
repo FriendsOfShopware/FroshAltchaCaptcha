@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Tinect\AltchaCaptcha\Storefront\Framework;
+namespace Frosh\AltchaCaptcha\Storefront\Framework;
 
 use AltchaOrg\Altcha\Altcha;
 use Shopware\Core\Checkout\Customer\CustomerEntity;
