@@ -1,15 +1,15 @@
-name: BuildPlugin
+name: PackPlugin
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-    build:
-        uses: FriendsOfShopware/actions/.github/workflows/github.yml@main
-        with:
-            extensionName: FroshAltchaCaptcha
-            shopwareVersion: 6.6.0
-        secrets:
-            ghToken: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    uses: FriendsOfShopware/actions/.github/workflows/store-shopware-cli.yml@main
+    with:
+      extensionName: FroshAltchaCaptcha
+    secrets:
+      accountUser: ${{ secrets.ACCOUNT_USER }}
+      accountPassword: ${{ secrets.ACCOUNT_PASSWORD }}
+      ghToken: ${{ secrets.GITHUB_TOKEN }}
