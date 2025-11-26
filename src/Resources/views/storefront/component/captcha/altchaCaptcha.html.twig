@@ -10,6 +10,9 @@
             {% if config(configPath ~ '.hideLogo') %}
                 hideLogo="1"
             {% endif %}
+            {% if config(configPath ~ '.floating') %}
+                floating="1"
+            {% endif %}
 
             auto="onsubmit"
         ></altcha-widget>

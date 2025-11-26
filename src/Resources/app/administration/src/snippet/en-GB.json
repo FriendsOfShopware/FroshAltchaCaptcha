@@ -7,6 +7,7 @@
                 "altchaCaptchaWhitelistCustomers": "No captcha for logged in customers",
                 "altchaCaptchaHideFooter": "Hide Altcha Footer",
                 "altchaCaptchaHideLogo": "Hide Altcha Logo",
+                "altchaCaptchaFloating": "Floating UI",
                 "altchaCaptchaDescription": "Based on proof-of-work mechanisms, Altcha Captcha employs a fundamentally new approach to securely defend your websites and online services from spam and bots."
             }
         }

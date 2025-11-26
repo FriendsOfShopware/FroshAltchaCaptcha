@@ -7,6 +7,7 @@
                 "altchaCaptchaWhitelistCustomers": "Kein Captcha für eingeloggte Kunden",
                 "altchaCaptchaHideFooter": "Verstecke Altcha Footer",
                 "altchaCaptchaHideLogo": "Verstecke Altcha Logo",
+                "altchaCaptchaFloating": "Floating UI",
                 "altchaCaptchaDescription": "Basierend auf Proof-of-Work-Mechanismen verfolgt Altcha Captcha einen grundlegend neuen Ansatz, um Deine Websites und Online-Dienste sicher vor Spam und Bots zu schützen."
             }
         }

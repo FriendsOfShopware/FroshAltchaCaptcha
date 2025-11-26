@@ -44,6 +44,11 @@
             name="altchaCaptchaHideLogo"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaHideLogo')"
         />
+        <sw-checkbox-field
+            v-model:value="currentValue.altchaCaptcha.config.floating"
+            name="altchaCaptchaFloating"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaFloating')"
+        />
     </mt-card>
 </sw-container>
 {% endblock %}
