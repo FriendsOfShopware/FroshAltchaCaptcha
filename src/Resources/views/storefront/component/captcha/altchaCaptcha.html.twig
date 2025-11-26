@@ -14,7 +14,7 @@
                 floating="1"
             {% endif %}
 
-            auto="onsubmit"
+            auto="{{ config(configPath ~ '.autoMode') }}"
         ></altcha-widget>
     {% endif %}
 {% endblock %}

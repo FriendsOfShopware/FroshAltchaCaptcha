@@ -29,6 +29,17 @@
             name="altchaCaptchaSecretKey"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaSecretKey')"
         />
+
+        <sw-select-field
+            v-model:value="currentValue.altchaCaptcha.config.autoMode"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaAutoMode')"
+        >
+            <option value="off">off</option>
+            <option value="onsubmit">onsubmit</option>
+            <option value="onfocus">onfocus</option>
+            <option value="onload">onload</option>
+        </sw-select-field>
+
         <sw-checkbox-field
             v-model:value="currentValue.altchaCaptcha.config.whitelistCustomers"
             name="altchaCaptchaWhitelistCustomers"

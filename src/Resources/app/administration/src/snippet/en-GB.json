@@ -8,6 +8,7 @@
                 "altchaCaptchaHideFooter": "Hide Altcha Footer",
                 "altchaCaptchaHideLogo": "Hide Altcha Logo",
                 "altchaCaptchaFloating": "Floating UI",
+                "altchaCaptchaAutoMode": "Auto mode",
                 "altchaCaptchaDescription": "Based on proof-of-work mechanisms, Altcha Captcha employs a fundamentally new approach to securely defend your websites and online services from spam and bots."
             }
         }
