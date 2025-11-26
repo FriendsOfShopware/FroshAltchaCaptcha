@@ -10,10 +10,6 @@ Self-hosted Altcha Captcha plugin for Shopware 6. Adds secure, user-friendly bot
 - **User-Friendly**: Better user experience compared to traditional CAPTCHAs
 - **Easy Integration**: Works seamlessly with Shopware 6 forms
 
-## Requirements
-
-- Shopware 6.6.x
-
 ## Installation
 
 ### Via Composer
@@ -65,7 +61,6 @@ src/
 ## Support
 
 - **GitHub Issues**: [https://github.com/FriendsOfShopware/FroshAltchaCaptcha/issues](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/issues)
-- **Documentation**: [https://github.com/FriendsOfShopware/FroshAltchaCaptcha/](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/)
 
 ## License
 
