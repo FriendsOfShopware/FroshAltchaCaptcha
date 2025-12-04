@@ -1,5 +1,0 @@
-vendor
-src/Resources/app/storefront/dist
-node_modules
-public/
-package-lock.json
