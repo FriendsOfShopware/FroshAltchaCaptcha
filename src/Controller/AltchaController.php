@@ -24,7 +24,7 @@ class AltchaController extends AbstractController
     {
         try {
             $secretKey = $this->systemConfigService->getString(AltchaCaptcha::CONFIG_PATH . '.' . AltchaCaptcha::CONFIG_FIELD_SECRET);
-            $challengeOptions = new ChallengeOptions(expires: (new \DateTimeImmutable())->add(new \DateInterval('PT1M')));
+            $challengeOptions = new ChallengeOptions(expires: (new \DateTimeImmutable())->add(new \DateInterval('PT5M')));
             $challenge = (new Altcha($secretKey))->createChallenge($challengeOptions);
 
             return new JsonResponse($challenge);
