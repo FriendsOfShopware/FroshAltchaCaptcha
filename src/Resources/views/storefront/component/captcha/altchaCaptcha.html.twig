@@ -2,6 +2,8 @@
     {% set configPath = constant('Frosh\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
 
     {% if not config(cconfigPath ~ '.whitelistCustomers') %}
+        {% set autoMode = config(configPath ~ '.autoMode') %}
+
         <altcha-widget
             challengeurl="{{ path('widgets.altcha.challenge') }}"
             {% if config(configPath ~ '.hideFooter') %}
@@ -13,8 +15,12 @@
             {% if config(configPath ~ '.floating') %}
                 floating="1"
             {% endif %}
+            {% if config(configPath ~ '.invisible') %}
+                {% set autoMode = 'onsubmit' %}
+                class="d-none"
+            {% endif %}
 
-            auto="{{ config(configPath ~ '.autoMode') }}"
+            auto="{{ autoMode }}"
         ></altcha-widget>
     {% endif %}
 {% endblock %}

@@ -1,6 +1,7 @@
 {
     "sw-settings-basic-information": {
         "captcha": {
+            "altchaCaptchaDescription": "Basierend auf Proof-of-Work-Mechanismen verfolgt Altcha Captcha einen grundlegend neuen Ansatz, um Deine Websites und Online-Dienste sicher vor Spam und Bots zu schützen.",
             "label": {
                 "altchaCaptcha": "Altcha Captcha",
                 "altchaCaptchaSecretKey": "Geheimer Schlüssel",
@@ -9,7 +10,10 @@
                 "altchaCaptchaHideLogo": "Verstecke Altcha Logo",
                 "altchaCaptchaFloating": "Floating UI",
                 "altchaCaptchaAutoMode": "Automatische Verifizierung ohne Benutzerinteraktion",
-                "altchaCaptchaDescription": "Basierend auf Proof-of-Work-Mechanismen verfolgt Altcha Captcha einen grundlegend neuen Ansatz, um Deine Websites und Online-Dienste sicher vor Spam und Bots zu schützen."
+                "altchaCaptchaInvisible": "Captcha unsichtbar"
+            },
+            "helpText": {
+                "altchaCaptchaInvisible": "Das Captcha wird nur angezeigt, wenn es nicht verifiziert ist. Die automatische Verifizierung wird auf \"onsubmit\" gesetzt."
             }
         }
     }
