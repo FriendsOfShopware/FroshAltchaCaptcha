@@ -44,10 +44,7 @@ class AltchaCaptcha extends AbstractCaptcha
         }
 
         try {
-            $decodedPayload = \base64_decode($verifyData, true);
-            $payload = \json_decode($decodedPayload, true, 512, \JSON_THROW_ON_ERROR);
-
-            return (new Altcha($secretKey))->verifySolution($payload);
+            return (new Altcha($secretKey))->verifySolution($verifyData);
         } catch (\Throwable) {
             return false;
         }
