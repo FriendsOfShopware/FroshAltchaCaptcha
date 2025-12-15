@@ -3,8 +3,5 @@
   "extends": [
     "config:recommended"
   ],
-  "separateMajorMinor": true,
-  "schedule": [
-    "* * * * *"
-  ]
+  "separateMajorMinor": true
 }
