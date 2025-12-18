@@ -26,14 +26,16 @@ store:
       - self-hosted
       - Keine persönlichen Daten
       - Kein Tracking
-      - accessibility
-      - compliance
+      - Unsichtbarkeit möglich
+      - Accessibility
+      - Compliance
     en:
       - self-hosted
       - No personal data collection
       - No tracking
-      - compliance
-      - accessibility
+      - invisible possible
+      - Compliance
+      - Accessibility
   images:
     - file: src/Resources/store/images/0.png
       activate:
