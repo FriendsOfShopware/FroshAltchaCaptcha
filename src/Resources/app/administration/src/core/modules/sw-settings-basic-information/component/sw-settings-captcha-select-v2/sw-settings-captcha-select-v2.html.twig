@@ -55,6 +55,13 @@
             name="altchaCaptchaFloating"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaFloating')"
         />
+        <mt-switch
+            v-model="currentValue.altchaCaptcha.config.invisible"
+            name="altchaCaptchaInvisible"
+            :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaInvisible')"
+            :helpText="$tc('sw-settings-basic-information.captcha.helpText.altchaCaptchaInvisible')"
+            bordered="true"
+        />
     </mt-card>
 </sw-container>
 {% endblock %}

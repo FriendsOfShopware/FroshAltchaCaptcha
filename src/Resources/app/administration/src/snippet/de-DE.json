@@ -13,7 +13,7 @@
                 "altchaCaptchaInvisible": "Captcha unsichtbar"
             },
             "helpText": {
-                "altchaCaptchaInvisible": "Das Captcha wird nur angezeigt, wenn es nicht verifiziert ist. Die automatische Verifizierung wird auf \"onsubmit\" gesetzt."
+                "altchaCaptchaInvisible": "Das Captcha wird nur angezeigt, wenn es nicht automatisch verifiziert werden konnte. Die automatische Verifizierung wird auf \"onsubmit\" gesetzt."
             }
         }
     }
