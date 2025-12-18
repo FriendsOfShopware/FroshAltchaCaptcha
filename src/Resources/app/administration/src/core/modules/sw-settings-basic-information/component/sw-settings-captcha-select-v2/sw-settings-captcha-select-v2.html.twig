@@ -21,9 +21,9 @@
         >
             {{ $tc('sw-settings-basic-information.captcha.altchaCaptchaDescription') }}
         </p>
-
-        <mt-password-field
-            v-model="currentValue.altchaCaptcha.config.secretKey"
+        <sw-password-field
+            type="password"
+            v-model:value="currentValue.altchaCaptcha.config.secretKey"
             name="altchaCaptchaSecretKey"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaSecretKey')"
         />
@@ -34,32 +34,32 @@
             :options="captchaModeOptions"
         />
 
-        <mt-switch
-            v-model="currentValue.altchaCaptcha.config.whitelistCustomers"
+        <sw-switch-field
+            v-model:value="currentValue.altchaCaptcha.config.whitelistCustomers"
             name="altchaCaptchaWhitelistCustomers"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaWhitelistCustomers')"
             bordered="true"
         />
-        <mt-switch
-            v-model="currentValue.altchaCaptcha.config.hideFooter"
+        <sw-switch-field
+            v-model:value="currentValue.altchaCaptcha.config.hideFooter"
             name="altchaCaptchaHideFooter"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaHideFooter')"
             bordered="true"
         />
-        <mt-switch
-            v-model="currentValue.altchaCaptcha.config.hideLogo"
+        <sw-switch-field
+            v-model:value="currentValue.altchaCaptcha.config.hideLogo"
             name="altchaCaptchaHideLogo"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaHideLogo')"
             bordered="true"
         />
-        <mt-switch
-            v-model="currentValue.altchaCaptcha.config.floating"
+        <sw-switch-field
+            v-model:value="currentValue.altchaCaptcha.config.floating"
             name="altchaCaptchaFloating"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaFloating')"
             bordered="true"
         />
-        <mt-switch
-            v-model="currentValue.altchaCaptcha.config.invisible"
+        <sw-switch-field
+            v-model:value="currentValue.altchaCaptcha.config.invisible"
             name="altchaCaptchaInvisible"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaInvisible')"
             :helpText="$tc('sw-settings-basic-information.captcha.helpText.altchaCaptchaInvisible')"
