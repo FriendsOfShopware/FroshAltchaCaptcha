@@ -13,6 +13,6 @@ export default Shopware.Component.wrapComponentConfig({
                 { value: 'onfocus', label: 'onfocus' },
                 { value: 'onload', label: 'onload' },
             ];
-        }
+        },
     },
 });

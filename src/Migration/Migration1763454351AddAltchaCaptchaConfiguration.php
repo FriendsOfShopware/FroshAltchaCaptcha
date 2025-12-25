@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Frosh\AltchaCaptcha\Migration;
 
 use Doctrine\DBAL\Connection;
+use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 use Shopware\Core\Framework\Migration\MigrationStep;
 use Shopware\Core\Framework\Util\Random;
-use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 
 class Migration1763454351AddAltchaCaptchaConfiguration extends MigrationStep
 {

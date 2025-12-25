@@ -3,9 +3,9 @@
 namespace Frosh\AltchaCaptcha;
 
 use Doctrine\DBAL\Connection;
+use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\UninstallContext;
-use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 
 class FroshAltchaCaptcha extends Plugin
 {

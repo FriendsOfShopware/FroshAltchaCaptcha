@@ -13,7 +13,18 @@
                 size="xs"
                 class="mt-card__subtitle"
             >
-                Brought to Shopware for free by <a href="https://github.com/FriendsOfShopware" target="_blank" rel="noopener noreferrer">Friends of Shopware</a> and <a href="https://github.com/tinect/" target="_blank" rel="noopener noreferrer">@tinect</a>
+                Brought to Shopware for free by 
+                <a
+                    href="https://github.com/FriendsOfShopware"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >Friends of Shopware</a>
+                and
+                <a
+                    href="https://github.com/tinect/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >@tinect</a>
             </MtText>
         </template>
         <p
@@ -27,13 +38,11 @@
             name="altchaCaptchaSecretKey"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaSecretKey')"
         />
-
         <mt-select
             v-model="currentValue.altchaCaptcha.config.autoMode"
             :label="$tc('sw-settings-basic-information.captcha.label.altchaCaptchaAutoMode')"
             :options="captchaModeOptions"
         />
-
         <sw-switch-field
             v-model:value="currentValue.altchaCaptcha.config.whitelistCustomers"
             name="altchaCaptchaWhitelistCustomers"

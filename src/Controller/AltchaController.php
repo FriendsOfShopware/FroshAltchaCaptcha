@@ -4,12 +4,12 @@ namespace Frosh\AltchaCaptcha\Controller;
 
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\ChallengeOptions;
+use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 
 #[Route(defaults: ['_routeScope' => ['storefront']])]
 class AltchaController extends AbstractController
