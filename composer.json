@@ -41,5 +41,12 @@
             "de-DE": "https://github.com/FriendsOfShopware/FroshAltchaCaptcha/",
             "en-GB": "https://github.com/FriendsOfShopware/FroshAltchaCaptcha/"
         }
+    },
+    "scripts": {
+        "check": [
+            "docker run --rm -v $(pwd):/ext shopware/shopware-cli:latest extension validate --check-against lowest --full /ext",
+            "docker run --rm -v $(pwd):/ext shopware/shopware-cli:latest extension validate --check-against highest --full /ext"
+        ],
+        "format": "docker run --rm -v $(pwd):/ext shopware/shopware-cli:latest extension format /ext"
     }
 }
