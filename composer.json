@@ -26,8 +26,8 @@
     "extra": {
         "shopware-plugin-class": "Frosh\\AltchaCaptcha\\FroshAltchaCaptcha",
         "label": {
-            "de-DE": "AltchaCaptcha",
-            "en-GB": "AltchaCaptcha"
+            "de-DE": "Altcha Captcha",
+            "en-GB": "Altcha Captcha"
         },
         "description": {
             "de-DE": "Fügt selbstgehostetes Altcha-CAPTCHA zu Shopware 6 hinzu und stärkt die Formularsicherheit mit einer leichten, datenschutzfreundlichen Lösung gegen automatisierten Spam.",

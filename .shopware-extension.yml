@@ -23,14 +23,14 @@ store:
       - security
   features:
     de:
-      - self-hosted
+      - Keine externen Dienste
       - Keine persönlichen Daten
       - Kein Tracking
       - Unsichtbarkeit möglich
       - Accessibility
       - Compliance
     en:
-      - self-hosted
+      - No external service
       - No personal data collection
       - No tracking
       - invisible possible
