@@ -2,7 +2,14 @@
 
 namespace Frosh\AltchaCaptcha\Storefront\Framework;
 
+use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
+use AltchaOrg\Altcha\Challenge;
+use AltchaOrg\Altcha\ChallengeParameters;
+use AltchaOrg\Altcha\Payload;
+use AltchaOrg\Altcha\ServerSignature;
+use AltchaOrg\Altcha\Solution;
+use AltchaOrg\Altcha\VerifySolutionOptions;
 use Shopware\Core\Checkout\Customer\CustomerEntity;
 use Shopware\Core\PlatformRequest;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
@@ -43,11 +50,49 @@ class AltchaCaptcha extends AbstractCaptcha
             return false;
         }
 
-        try {
-            return (new Altcha($secretKey))->verifySolution($verifyData);
-        } catch (\Throwable) {
+        $decodedVerifyData = \base64_decode($verifyData, true);
+        if ($decodedVerifyData === false) {
             return false;
         }
+
+        $payload = \json_decode($decodedVerifyData, true);
+        if (!\is_array($payload)) {
+            return false;
+        }
+
+        if (isset($payload['verificationData'])) {
+            $result = ServerSignature::verifyServerSignature($payload, $secretKey);
+
+            return $result->verified;
+        }
+
+        if (isset($payload['challenge'], $payload['solution'])) {
+            $challengeData = $payload['challenge'];
+            $solutionData = $payload['solution'];
+
+            if (!\is_array($challengeData) || !\is_array($solutionData)) {
+                return false;
+            }
+
+            $challenge = new Challenge(
+                ChallengeParameters::fromArray($challengeData['parameters'] ?? []),
+                $challengeData['signature'] ?? null,
+            );
+
+            $solution = new Solution(
+                counter: (int) ($solutionData['counter'] ?? 0),
+                derivedKey: (string) ($solutionData['derivedKey'] ?? ''),
+            );
+
+            $result = (new Altcha($secretKey))->verifySolution(new VerifySolutionOptions(
+                payload: new Payload($challenge, $solution),
+                algorithm: new Pbkdf2(),
+            ));
+
+            return $result->verified;
+        }
+
+        return false;
     }
 
     public function getName(): string

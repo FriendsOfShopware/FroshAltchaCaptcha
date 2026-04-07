@@ -2,8 +2,9 @@
 
 namespace Frosh\AltchaCaptcha\Controller;
 
+use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
-use AltchaOrg\Altcha\ChallengeOptions;
+use AltchaOrg\Altcha\CreateChallengeOptions;
 use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,14 @@ class AltchaController extends AbstractController
     {
         try {
             $secretKey = $this->systemConfigService->getString(AltchaCaptcha::CONFIG_PATH . '.' . AltchaCaptcha::CONFIG_FIELD_SECRET);
-            $challengeOptions = new ChallengeOptions(expires: (new \DateTimeImmutable())->add(new \DateInterval('PT5M')));
+            $challengeOptions = new CreateChallengeOptions(
+                algorithm: new Pbkdf2(),
+                cost: 5000,
+                counter: \random_int(5000, 10000),
+                expiresAt: new \DateTimeImmutable('+5 minutes')
+            );
+
+            // TODO: add hmacKeySignatureSecret
             $challenge = (new Altcha($secretKey))->createChallenge($challengeOptions);
 
             return new JsonResponse($challenge);
