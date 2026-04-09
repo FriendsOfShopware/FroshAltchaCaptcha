@@ -28,7 +28,7 @@ class AltchaController extends AbstractController
             $challengeOptions = new CreateChallengeOptions(
                 algorithm: new Pbkdf2(),
                 cost: 5000,
-                counter: \random_int(5000, 10000),
+                counter: \random_int(1000, 1200),
                 expiresAt: new \DateTimeImmutable('+5 minutes')
             );
 
