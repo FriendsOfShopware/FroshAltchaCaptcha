@@ -4,16 +4,19 @@
     {% if not config(cconfigPath ~ '.whitelistCustomers') %}
         {% set autoMode = config(configPath ~ '.autoMode') %}
 
+        {% set configuration = {} %}
+        {% if config(configPath ~ '.hideFooter') %}
+            {% set configuration = configuration|merge({ hideFooter: true }) %}
+        {% endif %}
+        {% if config(configPath ~ '.hideLogo') %}
+            {% set configuration = configuration|merge({ hideLogo: true }) %}
+        {% endif %}
+
         <altcha-widget
-            challengeurl="{{ path('widgets.altcha.challenge') }}"
-            {% if config(configPath ~ '.hideFooter') %}
-                hidefooter="1"
-            {% endif %}
-            {% if config(configPath ~ '.hideLogo') %}
-                hideLogo="1"
-            {% endif %}
+            challenge="{{ path('widgets.altcha.challenge') }}"
+            configuration="{{ configuration|json_encode }}"
             {% if config(configPath ~ '.floating') %}
-                floating="1"
+                display="floating"
             {% endif %}
             {% if config(configPath ~ '.invisible') %}
                 {% set autoMode = 'onsubmit' %}

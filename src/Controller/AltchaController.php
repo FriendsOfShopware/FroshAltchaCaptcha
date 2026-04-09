@@ -32,7 +32,6 @@ class AltchaController extends AbstractController
                 expiresAt: new \DateTimeImmutable('+5 minutes')
             );
 
-            // TODO: add hmacKeySignatureSecret
             $challenge = (new Altcha($secretKey))->createChallenge($challengeOptions);
 
             return new JsonResponse($challenge);
