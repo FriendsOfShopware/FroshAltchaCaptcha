@@ -2,6 +2,7 @@ import 'altcha';
 import 'altcha/i18n/de';
 import 'altcha/i18n/nl';
 import 'altcha/i18n/fr-fr';
+import { State } from 'altcha/types';
 
 export default class AltchaPlugin extends window.PluginBaseClass {
     init() {
@@ -13,7 +14,10 @@ export default class AltchaPlugin extends window.PluginBaseClass {
             return;
         }
 
-        if (['verifying', 'verified'].includes(event.detail.state) === false) {
+        if (
+            [State.VERIFYING, State.VERIFIED].includes(event.detail.state) ===
+            false
+        ) {
             this.el.classList.remove('d-none');
         }
     }
