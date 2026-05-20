@@ -15,7 +15,7 @@
     "require": {
         "shopware/core": "~6.6.0||~6.7.0",
         "shopware/storefront": "*",
-        "altcha-org/altcha": "2.0.0"
+        "altcha-org/altcha": "2.0.2"
     },
     "license": "MIT",
     "autoload": {
