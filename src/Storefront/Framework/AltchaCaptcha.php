@@ -10,11 +10,13 @@ use AltchaOrg\Altcha\Payload;
 use AltchaOrg\Altcha\ServerSignature;
 use AltchaOrg\Altcha\Solution;
 use AltchaOrg\Altcha\VerifySolutionOptions;
+use Psr\Log\LoggerInterface;
 use Shopware\Core\Checkout\Customer\CustomerEntity;
 use Shopware\Core\PlatformRequest;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Framework\Captcha\AbstractCaptcha;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 
 #[AutoconfigureTag(name: 'shopware.storefront.captcha')]
@@ -24,6 +26,12 @@ class AltchaCaptcha extends AbstractCaptcha
     public const CAPTCHA_REQUEST_PARAMETER = 'altcha';
     public const CONFIG_FIELD_SECRET = 'secretKey';
     public const CONFIG_PATH = 'core.basicInformation.activeCaptchasV2.' . self::CAPTCHA_NAME . '.config';
+
+    public function __construct(
+        #[Autowire(service: 'monolog.logger.frosh_altcha_captcha')]
+        private readonly LoggerInterface $logger,
+    ) {
+    }
 
     public function isValid(
         Request $request,
@@ -51,7 +59,11 @@ class AltchaCaptcha extends AbstractCaptcha
             if (isset($payload['challenge'], $payload['solution'])) {
                 return $this->verifyPowSolution($payload, $secretKey);
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
+            $this->logger->warning('Altcha captcha verification threw; treating submission as invalid.', [
+                'exception' => $e,
+            ]);
+
             return false;
         }
 
