@@ -1,7 +1,7 @@
 {% block component_captcha_altcha %}
     {% set configPath = constant('Frosh\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
 
-    {% if not config(cconfigPath ~ '.whitelistCustomers') %}
+    {% if not config(configPath ~ '.whitelistCustomers') %}
         {% set autoMode = config(configPath ~ '.autoMode') %}
 
         {% set configuration = {} %}
