@@ -25,71 +25,34 @@ class AltchaCaptcha extends AbstractCaptcha
     public const CONFIG_FIELD_SECRET = 'secretKey';
     public const CONFIG_PATH = 'core.basicInformation.activeCaptchasV2.' . self::CAPTCHA_NAME . '.config';
 
-    public function isValid(Request $request, array $captchaConfig): bool
-    {
-        $whitelistCustomers = $captchaConfig['config']['whitelistCustomers'] ?? false;
-        if ($whitelistCustomers === true) {
-            $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
-            if ($context instanceof SalesChannelContext) {
-                $customer = $context->getCustomer();
-                if ($customer instanceof CustomerEntity && $customer->getGuest() === false) {
-                    return true;
-                }
-            }
+    public function isValid(
+        Request $request,
+        array $captchaConfig
+    ): bool {
+        if ($this->isWhitelistedCustomer($request, $captchaConfig)) {
+            return true;
         }
 
         $secretKey = $captchaConfig['config'][self::CONFIG_FIELD_SECRET] ?? '';
-
         if (!\is_string($secretKey) || $secretKey === '') {
             return false;
         }
 
-        $verifyData = $request->request->getString(self::CAPTCHA_REQUEST_PARAMETER);
-
-        if ($verifyData === '') {
+        $payload = $this->decodePayload($request->request->getString(self::CAPTCHA_REQUEST_PARAMETER));
+        if ($payload === null) {
             return false;
         }
 
-        $decodedVerifyData = \base64_decode($verifyData, true);
-        if ($decodedVerifyData === false) {
-            return false;
-        }
-
-        $payload = \json_decode($decodedVerifyData, true);
-        if (!\is_array($payload)) {
-            return false;
-        }
-
-        if (isset($payload['verificationData'])) {
-            $result = ServerSignature::verifyServerSignature($payload, $secretKey);
-
-            return $result->verified;
-        }
-
-        if (isset($payload['challenge'], $payload['solution'])) {
-            $challengeData = $payload['challenge'];
-            $solutionData = $payload['solution'];
-
-            if (!\is_array($challengeData) || !\is_array($solutionData)) {
-                return false;
+        try {
+            if (isset($payload['verificationData'])) {
+                return ServerSignature::verifyServerSignature($payload, $secretKey)->verified;
             }
 
-            $challenge = new Challenge(
-                ChallengeParameters::fromArray($challengeData['parameters'] ?? []),
-                $challengeData['signature'] ?? null,
-            );
-
-            $solution = new Solution(
-                counter: (int) ($solutionData['counter'] ?? 0),
-                derivedKey: (string) ($solutionData['derivedKey'] ?? ''),
-            );
-
-            $result = (new Altcha($secretKey))->verifySolution(new VerifySolutionOptions(
-                payload: new Payload($challenge, $solution),
-                algorithm: new Pbkdf2(),
-            ));
-
-            return $result->verified;
+            if (isset($payload['challenge'], $payload['solution'])) {
+                return $this->verifyPowSolution($payload, $secretKey);
+            }
+        } catch (\Throwable) {
+            return false;
         }
 
         return false;
@@ -98,5 +61,77 @@ class AltchaCaptcha extends AbstractCaptcha
     public function getName(): string
     {
         return self::CAPTCHA_NAME;
+    }
+
+    /**
+     * @param array<string, mixed> $captchaConfig
+     */
+    private function isWhitelistedCustomer(
+        Request $request,
+        array $captchaConfig
+    ): bool {
+        if (($captchaConfig['config']['whitelistCustomers'] ?? false) !== true) {
+            return false;
+        }
+
+        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
+        if (!$context instanceof SalesChannelContext) {
+            return false;
+        }
+
+        $customer = $context->getCustomer();
+
+        return $customer instanceof CustomerEntity && $customer->getGuest() === false;
+    }
+
+    /**
+     * Decodes the base64-encoded JSON payload sent by the Altcha widget.
+     *
+     * @return array<string, mixed>|null null when the payload is missing or malformed
+     */
+    private function decodePayload(string $verifyData): ?array
+    {
+        if ($verifyData === '') {
+            return null;
+        }
+
+        $decoded = \base64_decode($verifyData, true);
+        if ($decoded === false) {
+            return null;
+        }
+
+        $payload = \json_decode($decoded, true);
+
+        return \is_array($payload) ? $payload : null;
+    }
+
+    /**
+     * @param array<string, mixed> $payload
+     */
+    private function verifyPowSolution(
+        array $payload,
+        string $secretKey
+    ): bool {
+        $challengeData = $payload['challenge'];
+        $solutionData = $payload['solution'];
+
+        if (!\is_array($challengeData) || !\is_array($solutionData)) {
+            return false;
+        }
+
+        $challenge = new Challenge(
+            ChallengeParameters::fromArray($challengeData['parameters'] ?? []),
+            $challengeData['signature'] ?? null,
+        );
+
+        $solution = new Solution(
+            counter: (int) ($solutionData['counter'] ?? 0),
+            derivedKey: (string) ($solutionData['derivedKey'] ?? ''),
+        );
+
+        return (new Altcha($secretKey))->verifySolution(new VerifySolutionOptions(
+            payload: new Payload($challenge, $solution),
+            algorithm: new Pbkdf2(),
+        ))->verified;
     }
 }
