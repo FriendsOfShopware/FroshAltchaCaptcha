@@ -24,7 +24,10 @@ class AltchaController extends AbstractController
     public function getCaptcha(): JsonResponse
     {
         try {
-            $secretKey = $this->systemConfigService->getString(AltchaCaptcha::CONFIG_PATH . '.' . AltchaCaptcha::CONFIG_FIELD_SECRET);
+            $secretKey = $this->systemConfigService->getString(
+                AltchaCaptcha::CONFIG_PATH . '.' . AltchaCaptcha::CONFIG_FIELD_SECRET
+            );
+
             $challengeOptions = new CreateChallengeOptions(
                 algorithm: new Pbkdf2(),
                 cost: 5000,
