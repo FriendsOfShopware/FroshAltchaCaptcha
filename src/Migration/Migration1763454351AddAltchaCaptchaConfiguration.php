@@ -31,15 +31,15 @@ class Migration1763454351AddAltchaCaptchaConfiguration extends MigrationStep
             ],
         ];
 
-        $connection->executeStatement(
-            'UPDATE system_config SET configuration_value = JSON_MERGE_PATCH(
-                configuration_value,
-                :captchaItems
-            ) WHERE configuration_key = :key',
-            [
-                'captchaItems' => \json_encode(['_value' => $captchaItems], \JSON_THROW_ON_ERROR),
-                'key' => 'core.basicInformation.activeCaptchasV2',
-            ]
-        );
+        $sql = <<<'SQL'
+            UPDATE system_config
+            SET configuration_value = JSON_MERGE_PATCH(configuration_value, :captchaItems)
+            WHERE configuration_key = :key
+            SQL;
+
+        $connection->executeStatement($sql, [
+            'captchaItems' => \json_encode(['_value' => $captchaItems], \JSON_THROW_ON_ERROR),
+            'key' => 'core.basicInformation.activeCaptchasV2',
+        ]);
     }
 }
