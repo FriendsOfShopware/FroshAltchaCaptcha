@@ -5,7 +5,7 @@
             "label": {
                 "altchaCaptcha": "Altcha Captcha",
                 "altchaCaptchaSecretKey": "Geheimer Schlüssel",
-                "altchaCaptchaWhitelistCustomers": "Kein Captcha für eingeloggte Kunden",
+                "altchaCaptchaWhitelistCustomers": "Einfache Captcha für eingeloggte Kunden",
                 "altchaCaptchaHideFooter": "Verstecke Altcha Footer",
                 "altchaCaptchaHideLogo": "Verstecke Altcha Logo",
                 "altchaCaptchaFloating": "Floating UI",
@@ -13,6 +13,7 @@
                 "altchaCaptchaInvisible": "Captcha unsichtbar"
             },
             "helpText": {
+                "altchaCaptchaWhitelistCustomers": "Eingeloggte Kunden (keine Gäste) erhalten eine Challenge mit minimaler Schwierigkeit, die ohne Benutzerinteraktion sofort gelöst wird. Das Widget wird immer gerendert, um korrektes Verhalten beim HTTP-Caching sicherzustellen.",
                 "altchaCaptchaInvisible": "Das Captcha wird nur angezeigt, wenn es nicht automatisch verifiziert werden konnte. Die automatische Verifizierung wird auf \"onsubmit\" gesetzt."
             }
         }

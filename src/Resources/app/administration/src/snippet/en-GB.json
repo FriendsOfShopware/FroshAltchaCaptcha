@@ -5,7 +5,7 @@
             "label": {
                 "altchaCaptcha": "Altcha Captcha",
                 "altchaCaptchaSecretKey": "Secret key",
-                "altchaCaptchaWhitelistCustomers": "No captcha for logged in customers",
+                "altchaCaptchaWhitelistCustomers": "Simple captcha solve for logged-in customers",
                 "altchaCaptchaHideFooter": "Hide Altcha Footer",
                 "altchaCaptchaHideLogo": "Hide Altcha Logo",
                 "altchaCaptchaFloating": "Floating UI",
@@ -13,6 +13,7 @@
                 "altchaCaptchaInvisible": "Captcha invisible"
             },
             "helpText": {
+                "altchaCaptchaWhitelistCustomers": "Logged-in (non-guest) customers receive a minimal-difficulty challenge that resolves instantly without user interaction. The widget is always rendered to ensure correct behaviour with HTTP caching.",
                 "altchaCaptchaInvisible": "The captcha is only displayed when it could not be verified automatically. Automatic verification is set to \"onsubmit\"."
             }
         }
