@@ -1,33 +1,27 @@
 {% block component_captcha_altcha %}
     {% set configPath = constant('Frosh\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
 
-    {% set froshAltchaIsWhitelisted = config(configPath ~ '.whitelistCustomers')
-        and context.customer
-        and not context.customer.guest %}
+    {% set autoMode = config(configPath ~ '.autoMode') %}
 
-    {% if not froshAltchaIsWhitelisted %}
-        {% set autoMode = config(configPath ~ '.autoMode') %}
-
-        {% set configuration = {} %}
-        {% if config(configPath ~ '.hideFooter') %}
-            {% set configuration = configuration|merge({ hideFooter: true }) %}
-        {% endif %}
-        {% if config(configPath ~ '.hideLogo') %}
-            {% set configuration = configuration|merge({ hideLogo: true }) %}
-        {% endif %}
-
-        <altcha-widget
-            challenge="{{ path('widgets.altcha.challenge') }}"
-            configuration="{{ configuration|json_encode }}"
-            {% if config(configPath ~ '.floating') %}
-                display="floating"
-            {% endif %}
-            {% if config(configPath ~ '.invisible') %}
-                {% set autoMode = 'onsubmit' %}
-                class="d-none"
-            {% endif %}
-
-            auto="{{ autoMode }}"
-        ></altcha-widget>
+    {% set configuration = {} %}
+    {% if config(configPath ~ '.hideFooter') %}
+        {% set configuration = configuration|merge({ hideFooter: true }) %}
     {% endif %}
+    {% if config(configPath ~ '.hideLogo') %}
+        {% set configuration = configuration|merge({ hideLogo: true }) %}
+    {% endif %}
+
+    <altcha-widget
+        challenge="{{ url('widgets.altcha.challenge') }}"
+        configuration="{{ configuration|json_encode }}"
+        {% if config(configPath ~ '.floating') %}
+            display="floating"
+        {% endif %}
+        {% if config(configPath ~ '.invisible') %}
+            {% set autoMode = 'onsubmit' %}
+            class="d-none"
+        {% endif %}
+
+        auto="{{ autoMode }}"
+    ></altcha-widget>
 {% endblock %}
