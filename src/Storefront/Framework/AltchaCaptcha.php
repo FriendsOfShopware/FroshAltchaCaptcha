@@ -11,9 +11,6 @@ use AltchaOrg\Altcha\ServerSignature;
 use AltchaOrg\Altcha\Solution;
 use AltchaOrg\Altcha\VerifySolutionOptions;
 use Psr\Log\LoggerInterface;
-use Shopware\Core\Checkout\Customer\CustomerEntity;
-use Shopware\Core\PlatformRequest;
-use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Framework\Captcha\AbstractCaptcha;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -37,10 +34,6 @@ class AltchaCaptcha extends AbstractCaptcha
         Request $request,
         array $captchaConfig
     ): bool {
-        if ($this->isWhitelistedCustomer($request, $captchaConfig)) {
-            return true;
-        }
-
         $secretKey = $captchaConfig['config'][self::CONFIG_FIELD_SECRET] ?? '';
         if (!\is_string($secretKey) || $secretKey === '') {
             return false;
@@ -73,27 +66,6 @@ class AltchaCaptcha extends AbstractCaptcha
     public function getName(): string
     {
         return self::CAPTCHA_NAME;
-    }
-
-    /**
-     * @param array<string, mixed> $captchaConfig
-     */
-    private function isWhitelistedCustomer(
-        Request $request,
-        array $captchaConfig
-    ): bool {
-        if (($captchaConfig['config']['whitelistCustomers'] ?? false) !== true) {
-            return false;
-        }
-
-        $context = $request->attributes->get(PlatformRequest::ATTRIBUTE_SALES_CHANNEL_CONTEXT_OBJECT);
-        if (!$context instanceof SalesChannelContext) {
-            return false;
-        }
-
-        $customer = $context->getCustomer();
-
-        return $customer instanceof CustomerEntity && $customer->getGuest() === false;
     }
 
     /**
