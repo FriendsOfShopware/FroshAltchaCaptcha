@@ -3,6 +3,6 @@ monolog:
     handlers:
         frosh_altcha_captcha:
             type: rotating_file
-            path: "%kernel.logs_dir%/frosh_altcha_captcha_%kernel.environment%.log"
+            path: '%kernel.logs_dir%/frosh_altcha_captcha_%kernel.environment%.log'
             level: warning
-            channels: ["frosh_altcha_captcha"]
+            channels: ['frosh_altcha_captcha']
