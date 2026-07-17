@@ -6,8 +6,10 @@ use AltchaOrg\Altcha\Algorithm\Pbkdf2;
 use AltchaOrg\Altcha\Altcha;
 use AltchaOrg\Altcha\CreateChallengeOptions;
 use Frosh\AltchaCaptcha\Storefront\Framework\AltchaCaptcha;
+use Psr\Log\LoggerInterface;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,6 +19,8 @@ class AltchaController extends AbstractController
 {
     public function __construct(
         private readonly SystemConfigService $systemConfigService,
+        #[Autowire(service: 'monolog.logger.frosh_altcha_captcha')]
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -39,7 +43,11 @@ class AltchaController extends AbstractController
 
             return new JsonResponse($challenge);
         } catch (\Throwable $e) {
-            return new JsonResponse($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+            $this->logger->error('Altcha captcha challenge', [
+                'exception' => $e,
+            ]);
+
+            return new JsonResponse(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
