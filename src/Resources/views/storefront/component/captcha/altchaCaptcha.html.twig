@@ -1,27 +1,33 @@
 {% block component_captcha_altcha %}
     {% set configPath = constant('Frosh\\AltchaCaptcha\\Storefront\\Framework\\AltchaCaptcha::CONFIG_PATH') %}
 
-    {% set autoMode = config(configPath ~ '.autoMode') %}
+    {% set froshAltchaIsWhitelisted = config(configPath ~ '.whitelistCustomers')
+        and context.customer
+        and not context.customer.guest %}
 
-    {% set configuration = {} %}
-    {% if config(configPath ~ '.hideFooter') %}
-        {% set configuration = configuration|merge({ hideFooter: true }) %}
-    {% endif %}
-    {% if config(configPath ~ '.hideLogo') %}
-        {% set configuration = configuration|merge({ hideLogo: true }) %}
-    {% endif %}
+    {% if not froshAltchaIsWhitelisted %}
+        {% set autoMode = config(configPath ~ '.autoMode') %}
 
-    <altcha-widget
-        challenge="{{ url('widgets.altcha.challenge') }}"
-        configuration="{{ configuration|json_encode }}"
-        {% if config(configPath ~ '.floating') %}
-            display="floating"
+        {% set configuration = {} %}
+        {% if config(configPath ~ '.hideFooter') %}
+            {% set configuration = configuration|merge({ hideFooter: true }) %}
         {% endif %}
-        {% if config(configPath ~ '.invisible') %}
-            {% set autoMode = 'onsubmit' %}
-            class="d-none"
+        {% if config(configPath ~ '.hideLogo') %}
+            {% set configuration = configuration|merge({ hideLogo: true }) %}
         {% endif %}
 
-        auto="{{ autoMode }}"
-    ></altcha-widget>
+        <altcha-widget
+            challenge="{{ path('widgets.altcha.challenge') }}"
+            configuration="{{ configuration|json_encode }}"
+            {% if config(configPath ~ '.floating') %}
+                display="floating"
+            {% endif %}
+            {% if config(configPath ~ '.invisible') %}
+                {% set autoMode = 'onsubmit' %}
+                class="d-none"
+            {% endif %}
+
+            auto="{{ autoMode }}"
+        ></altcha-widget>
+    {% endif %}
 {% endblock %}
