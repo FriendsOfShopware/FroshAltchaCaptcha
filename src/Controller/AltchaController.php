@@ -47,7 +47,7 @@ class AltchaController extends AbstractController
                 'exception' => $e,
             ]);
 
-            return new JsonResponse(null, Response::HTTP_INTERNAL_SERVER_ERROR);
+            return new JsonResponse('HTTP_INTERNAL_SERVER_ERROR', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
