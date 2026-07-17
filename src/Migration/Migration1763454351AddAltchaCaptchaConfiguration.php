@@ -24,7 +24,6 @@ class Migration1763454351AddAltchaCaptchaConfiguration extends MigrationStep
                 'isActive' => false,
                 'config' => [
                     'secretKey' => Random::getString(32),
-                    'whitelistCustomers' => false,
                     'hideLogo' => false,
                     'hideFooter' => false,
                 ],

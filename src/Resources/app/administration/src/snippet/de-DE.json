@@ -5,7 +5,6 @@
             "label": {
                 "altchaCaptcha": "Altcha Captcha",
                 "altchaCaptchaSecretKey": "Geheimer Schlüssel",
-                "altchaCaptchaWhitelistCustomers": "Kein Captcha für eingeloggte Kunden",
                 "altchaCaptchaHideFooter": "Verstecke Altcha Footer",
                 "altchaCaptchaHideLogo": "Verstecke Altcha Logo",
                 "altchaCaptchaFloating": "Floating UI",
