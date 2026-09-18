@@ -11,7 +11,7 @@ on:
 jobs:
     cs:
         if: github.event_name != 'schedule'
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-26.04
         steps:
             - name: Checkout
               uses: actions/checkout@v7
@@ -22,7 +22,7 @@ jobs:
                   action: format
 
     check:
-        runs-on: ubuntu-24.04
+        runs-on: ubuntu-26.04
         strategy:
             fail-fast: false
             matrix:
