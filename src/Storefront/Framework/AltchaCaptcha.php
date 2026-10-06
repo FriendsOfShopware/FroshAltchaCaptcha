@@ -10,6 +10,7 @@ use AltchaOrg\Altcha\Payload;
 use AltchaOrg\Altcha\ServerSignature;
 use AltchaOrg\Altcha\Solution;
 use AltchaOrg\Altcha\VerifySolutionOptions;
+use Psr\Cache\CacheItemPoolInterface;
 use Psr\Log\LoggerInterface;
 use Shopware\Storefront\Framework\Captcha\AbstractCaptcha;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -24,9 +25,16 @@ class AltchaCaptcha extends AbstractCaptcha
     public const CONFIG_FIELD_SECRET = 'secretKey';
     public const CONFIG_PATH = 'core.basicInformation.activeCaptchasV2.' . self::CAPTCHA_NAME . '.config';
 
+    /**
+     * How long a used challenge is remembered when the payload carries no expiry of its own.
+     */
+    private const USED_CHALLENGE_FALLBACK_TTL = 3600;
+
     public function __construct(
         #[Autowire(service: 'monolog.logger.frosh_altcha_captcha')]
         private readonly LoggerInterface $logger,
+        #[Autowire(service: 'cache.app')]
+        private readonly CacheItemPoolInterface $cache,
     ) {
     }
 
@@ -46,11 +54,18 @@ class AltchaCaptcha extends AbstractCaptcha
 
         try {
             if (isset($payload['verificationData'])) {
-                return ServerSignature::verifyServerSignature($payload, $secretKey)->verified;
+                $verification = ServerSignature::verifyServerSignature($payload, $secretKey);
+
+                return $verification->verified
+                    && $this->markChallengeUsed($payload['signature'], $verification->verificationData?->expire);
             }
 
             if (isset($payload['challenge'], $payload['solution'])) {
-                return $this->verifyPowSolution($payload, $secretKey);
+                return $this->verifyPowSolution($payload, $secretKey)
+                    && $this->markChallengeUsed(
+                        $payload['challenge']['signature'] ?? null,
+                        $payload['challenge']['parameters']['expiresAt'] ?? null,
+                    );
             }
         } catch (\Throwable $e) {
             $this->logger->warning('Altcha captcha verification threw; treating submission as invalid.', [
@@ -117,5 +132,34 @@ class AltchaCaptcha extends AbstractCaptcha
             payload: new Payload($challenge, $solution),
             algorithm: new Pbkdf2(),
         ))->verified;
+    }
+
+    /**
+     * A solved challenge stays valid until it expires, so without this check a bot can
+     * solve one challenge and replay the same payload for every submission until then.
+     * Returns false when the challenge was already used.
+     */
+    private function markChallengeUsed(
+        mixed $signature,
+        mixed $expiresAt
+    ): bool {
+        if (!\is_string($signature) || $signature === '') {
+            return false;
+        }
+
+        $item = $this->cache->getItem('frosh_altcha_used_' . hash('sha256', $signature));
+        if ($item->isHit()) {
+            return false;
+        }
+
+        $item->set(true);
+        if ((\is_int($expiresAt) || \is_float($expiresAt)) && $expiresAt > time()) {
+            $item->expiresAt((new \DateTimeImmutable())->setTimestamp((int) ceil($expiresAt)));
+        } else {
+            $item->expiresAfter(self::USED_CHALLENGE_FALLBACK_TTL);
+        }
+        $this->cache->save($item);
+
+        return true;
     }
 }
