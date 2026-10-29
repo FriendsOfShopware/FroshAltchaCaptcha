@@ -1,0 +1,12 @@
+# 2.2.0
+- [chore: use specific models](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/b400944)
+- [chore: use new workflow to publish](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/335a9c3)
+- [chore: prepare release 2.2.0](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/5b4555d)
+- [feat: rate-limit challenge endpoint per client IP](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/654760b)
+- [fix: make challenge counter range start near zero](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/5513c04)
+- [fix: lock used-challenge check against concurrent replays](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/6639e48)
+- [fix: prevent replay of solved Altcha challenges](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/c1569d5)
+- [chore(deps): update dependency altcha to v3.5.0](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/e4ea8ee)
+- [chore(deps): update dependency altcha to v3.4.1](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/a92a453)
+- [chore(deps): update dependency altcha to v3.3.0](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/e04847c)
+- [fix(deps): update dependency altcha-org/altcha to v2.3.0](https://github.com/FriendsOfShopware/FroshAltchaCaptcha/commit/e713e66)
