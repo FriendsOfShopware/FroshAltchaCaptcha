@@ -16,6 +16,7 @@ use Shopware\Storefront\Framework\Captcha\AbstractCaptcha;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Lock\LockFactory;
 
 #[AutoconfigureTag(name: 'shopware.storefront.captcha')]
 class AltchaCaptcha extends AbstractCaptcha
@@ -35,6 +36,7 @@ class AltchaCaptcha extends AbstractCaptcha
         private readonly LoggerInterface $logger,
         #[Autowire(service: 'cache.app')]
         private readonly CacheItemPoolInterface $cache,
+        private readonly LockFactory $lockFactory,
     ) {
     }
 
@@ -147,19 +149,31 @@ class AltchaCaptcha extends AbstractCaptcha
             return false;
         }
 
-        $item = $this->cache->getItem('frosh_altcha_used_' . hash('sha256', $signature));
-        if ($item->isHit()) {
+        $key = 'frosh_altcha_used_' . hash('xxh128', $signature);
+
+        // Without the lock, concurrent submissions of the same payload could all pass the isHit() check.
+        $lock = $this->lockFactory->createLock($key);
+        if (!$lock->acquire()) {
             return false;
         }
 
-        $item->set(true);
-        if ((\is_int($expiresAt) || \is_float($expiresAt)) && $expiresAt > time()) {
-            $item->expiresAt((new \DateTimeImmutable())->setTimestamp((int) ceil($expiresAt)));
-        } else {
-            $item->expiresAfter(self::USED_CHALLENGE_FALLBACK_TTL);
-        }
-        $this->cache->save($item);
+        try {
+            $item = $this->cache->getItem($key);
+            if ($item->isHit()) {
+                return false;
+            }
 
-        return true;
+            $item->set(true);
+            if ((\is_int($expiresAt) || \is_float($expiresAt)) && $expiresAt > time()) {
+                $item->expiresAt((new \DateTimeImmutable())->setTimestamp((int) ceil($expiresAt)));
+            } else {
+                $item->expiresAfter(self::USED_CHALLENGE_FALLBACK_TTL);
+            }
+            $this->cache->save($item);
+
+            return true;
+        } finally {
+            $lock->release();
+        }
     }
 }
