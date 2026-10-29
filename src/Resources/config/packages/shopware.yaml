@@ -1,0 +1,8 @@
+shopware:
+    api:
+        rate_limiter:
+            frosh_altcha_challenge:
+                enabled: true
+                policy: 'sliding_window'
+                limit: 30
+                interval: '60 seconds'
