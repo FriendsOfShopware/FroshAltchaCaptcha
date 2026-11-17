@@ -13,7 +13,12 @@ class FroshAltchaCaptcha extends Plugin
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);
-        $this->buildDefaultConfig($container);
+
+        // ignore the deprecation warning for buildDefaultConfig() before Shopware 6.6.8
+        // @phpstan-ignore-next-line
+        if (method_exists($this, 'buildDefaultConfig')) {
+            $this->buildDefaultConfig($container);
+        }
     }
 
     public function uninstall(UninstallContext $uninstallContext): void
